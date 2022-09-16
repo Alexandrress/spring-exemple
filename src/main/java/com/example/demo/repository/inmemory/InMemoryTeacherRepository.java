@@ -31,7 +31,7 @@ public class InMemoryTeacherRepository implements TeacherRepository {
     }
 
     @Override
-    public TeacherModel finById(int id) {
+    public TeacherModel findById(int id) {
         return teachers
                 .stream()
                 .filter(t -> t.getId() == id)

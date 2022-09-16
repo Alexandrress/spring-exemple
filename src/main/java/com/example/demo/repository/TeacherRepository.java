@@ -14,5 +14,5 @@ import java.util.List;
 public interface TeacherRepository {
     
     List<TeacherModel> findAll();
-    TeacherModel finById(int id);
+    TeacherModel findById(int id);
 }
