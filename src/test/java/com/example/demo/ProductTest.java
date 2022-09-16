@@ -4,13 +4,12 @@
  */
 package com.example.demo;
 
+import com.example.demo.model.ProductModel;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.assertj.core.api.Assert;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -20,25 +19,23 @@ import org.junit.jupiter.api.Test;
  */
 public class ProductTest {
     
-    private static final List<Product> CATALOG = Arrays.asList(
-        new Product(1, "Samsung S7", "Samsung", 1220),
-        new Product(2, "Apple mon cul", "Apple", 5000),
-        new Product(3, "Ching-Chong xiaomie", "JSP", 222),
-        new Product(2, "Apple mon cul 2 le retour", "Apple", 5001));
+    private static final List<ProductModel> CATALOG = Arrays.asList(new ProductModel(1, "Samsung S7", "Samsung", 1220),
+        new ProductModel(2, "Apple mon cul", "Apple", 5000),
+        new ProductModel(3, "Ching-Chong xiaomie", "JSP", 222),
+        new ProductModel(2, "Apple mon cul 2 le retour", "Apple", 5001));
     
     
     @Test
     public void shouldPrintUniqBrand(){
         System.out.print("shouldPrintUniqBrand() : ");
-        CATALOG.stream().map(Product::getBrand).distinct().forEach(System.out::println);
+        CATALOG.stream().map(ProductModel::getBrand).distinct().forEach(System.out::println);
     }
     
     @Test
     public void shouldPrintAllBrandsUppercaseAsStringJoinByComma(){
-        System.out.println(
-                "shouldPrintAllBrandsUppercaseAsStringJoinByComma() : " +
+        System.out.println("shouldPrintAllBrandsUppercaseAsStringJoinByComma() : " +
                 CATALOG.stream()
-                .map(Product::getBrand)
+                .map(ProductModel::getBrand)
                 .map(String::toUpperCase)
                 .collect(Collectors.joining(","))
         );
@@ -59,39 +56,39 @@ public class ProductTest {
     
     @Test
     public void getCheapestProduct(){
-        System.out.println("getCheapestProduct() : " + CATALOG.stream().min(Comparator.comparing(Product::getPrice)).get());
+        System.out.println("getCheapestProduct() : " + CATALOG.stream().min(Comparator.comparing(ProductModel::getPrice)).get());
     }
     
     @Test
     public void getAveragePrice(){
-        System.out.println("getAveragePrice() : " + CATALOG.stream().map(Product::getPrice).mapToDouble(price -> price).average());
+        System.out.println("getAveragePrice() : " + CATALOG.stream().map(ProductModel::getPrice).mapToDouble(price -> price).average());
     }
     
     @Test
     public void sumPrices(){
-        System.out.println("sumPrices() : " + CATALOG.stream().map(Product::getPrice).mapToDouble(price -> price).sum());
+        System.out.println("sumPrices() : " + CATALOG.stream().map(ProductModel::getPrice).mapToDouble(price -> price).sum());
     }
     
     @Test
     public void sumPricesWithReduce(){
-        System.out.println("sumPricesWithReduce() : " + CATALOG.stream().map(Product::getPrice).reduce(0.0, (total,price) -> total + price));
+        System.out.println("sumPricesWithReduce() : " + CATALOG.stream().map(ProductModel::getPrice).reduce(0.0, (total,price) -> total + price));
     }
     
     @Test
     public void getStatistics(){
-        System.out.println("getStatistics() : " + CATALOG.stream().map(Product::getPrice).mapToDouble(price -> price).summaryStatistics());
+        System.out.println("getStatistics() : " + CATALOG.stream().map(ProductModel::getPrice).mapToDouble(price -> price).summaryStatistics());
     }
     
     @Test
     public void shouldFindById(){
-        Product product = CATALOG.stream().filter(p -> p.getId() == 3).findFirst().orElse(null);
+        ProductModel product = CATALOG.stream().filter(p -> p.getId() == 3).findFirst().orElse(null);
         assertEquals(3, product.getId());
     }
     
     @Test
     public void shouldFindByIdWithForEach(){
-        Product product = null;
-        for(Product prd : CATALOG){
+        ProductModel product = null;
+        for(ProductModel prd : CATALOG){
             if(prd.getId() == 3)
                 product = prd;
         }
@@ -101,14 +98,14 @@ public class ProductTest {
     @Test
     public void shouldSortByBrand(){
         CATALOG.stream()
-               .sorted(Comparator.comparing(Product::getBrand)
-               .thenComparing(Product::getName))
+               .sorted(Comparator.comparing(ProductModel::getBrand)
+               .thenComparing(ProductModel::getName))
                .forEach(System.out::println);
         
         //Classe anonyme
-        Collections.sort(CATALOG, new Comparator<Product>(){
+        Collections.sort(CATALOG, new Comparator<ProductModel>(){
             @Override
-            public int compare(Product p1, Product p2){
+            public int compare(ProductModel p1, ProductModel p2){
                 return p1.getBrand().compareTo(p2.getBrand());
             }
         });
