@@ -39,7 +39,8 @@ public class ScheduleMockController {
     
     @RequestMapping(value="/schedules", method = RequestMethod.GET)
     @ResponseBody
-    public SchedulesDto getTeacherSchedule(@RequestParam int teacherId){
+    public SchedulesDto getTeacherSchedule(@RequestParam int teacherId) throws InterruptedException{
+        Thread.sleep(3000); //Simulate API response
         List<ScheduleDto> scheduleDtos = schedules.get(teacherId);
         return new SchedulesDto(scheduleDtos == null ? new ArrayList<>() : scheduleDtos);
     }
