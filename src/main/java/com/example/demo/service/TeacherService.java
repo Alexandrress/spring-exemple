@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 public class TeacherService {
     
     @Autowired
-    @Qualifier("jdbcTeacherRepository")
+    // @Qualifier("jdbcTeacherRepository") Remplacé dans RepositoryConfiguration puis dans app.properties
     private TeacherRepository teacherRepository;
     
     public TeachersDto findAll(){

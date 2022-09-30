@@ -8,6 +8,7 @@ import com.example.demo.model.TeacherModel;
 import com.example.demo.repository.TeacherRepository;
 import java.util.List;
 import java.util.Arrays;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Alexa
  */
 @Repository
+@ConditionalOnProperty(name = "demo.repository", havingValue = "inmemory")
 public class InMemoryTeacherRepository implements TeacherRepository {
 
     private static final List<TeacherModel> teachers = Arrays.asList(

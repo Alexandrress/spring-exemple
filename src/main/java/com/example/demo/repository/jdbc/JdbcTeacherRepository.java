@@ -8,6 +8,7 @@ import com.example.demo.model.TeacherModel;
 import com.example.demo.repository.TeacherRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
  * @author Alexa
  */
 @Repository
+@ConditionalOnProperty(name = "demo.repository", havingValue = "jdbc")
 public class JdbcTeacherRepository implements TeacherRepository {
     private static final String FIND_ALL_QUERY = "SELECT * FROM teacher;";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM teacher WHERE id = ?;";
