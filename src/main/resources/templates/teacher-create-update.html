@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layoutPage}" th:with="currentPage='teachers'">
+<head>
+    <title>Teachers</title>
+</head>
+<body>
+    <th:block layout:fragment="main">
+        <form th:object="${teacher}" class="form-horizontal" method="post">
+            <input type="hidden" name="id" th:field="*{id}" />
+            <div class="form-group">
+                <label for="firstName">FirstName</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" th:field="*{firstName}"/>
+                <div class="help-block alert alert-danger" th:if="${#fields.hasErrors('firstName')}">Required</div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">LastName</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" th:field="*{lastName}"/>
+                <div class="help-block alert alert-danger" th:if="${#fields.hasErrors('lastName')}">Required</div>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-control" th:field="*{subject}"/>
+                <div class="help-block alert alert-danger" th:if="${#fields.hasErrors('subject')}">Required</div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block"
+                            th:with="label=${action == 'create' ? 'Save' : 'Update'}"
+                            th:text="${label}">
+                    </button>
+                </div>
+            </div>
+        </form>
+    </th:block>
+</body>
+</html>

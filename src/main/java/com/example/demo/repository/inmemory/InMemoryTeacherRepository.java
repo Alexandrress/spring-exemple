@@ -40,4 +40,9 @@ public class InMemoryTeacherRepository implements TeacherRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public void save(TeacherModel teacherModel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

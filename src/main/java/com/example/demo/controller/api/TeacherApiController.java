@@ -4,8 +4,10 @@
  */
 package com.example.demo.controller.api;
 
+import com.example.demo.dto.SchedulesDto;
 import com.example.demo.dto.TeacherDto;
 import com.example.demo.dto.TeachersDto;
+import com.example.demo.service.ScheduleService;
 import com.example.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ public class TeacherApiController extends AbstractApiController {
     
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private ScheduleService scheduleService;
     
     @RequestMapping(value = "/teachers", method = RequestMethod.GET)
     @ResponseBody
@@ -35,5 +39,11 @@ public class TeacherApiController extends AbstractApiController {
     @ResponseBody
     public TeacherDto getTeacher(@PathVariable int teacherId) {
         return teacherService.findById(teacherId);
+    }
+    
+    @RequestMapping(value = "/teachers/{teacherId}/schedules", method = RequestMethod.GET)
+    @ResponseBody
+    public SchedulesDto getSchedule(@PathVariable int teacherId){
+        return scheduleService.getTeacherSchedule(teacherId);
     }
 }

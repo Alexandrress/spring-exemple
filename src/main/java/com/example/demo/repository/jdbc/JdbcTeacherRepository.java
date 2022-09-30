@@ -40,4 +40,9 @@ public class JdbcTeacherRepository implements TeacherRepository {
             return null;
         }
     }
+
+    @Override
+    public void save(TeacherModel teacherModel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
